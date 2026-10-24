@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06050f">
+<title>GAMEFORCE — магазин игровых ПК</title>
+<meta name="description" content="GAMEFORCE — магазин игровых ПК. Игровые компьютеры, комплектующие, периферия.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;1,800&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  --bg:#06050f;--bg2:#0b0919;--card:#0f0c26;--line:#241d52;
+  --txt:#ecebff;--mut:#9d9bcb;
+  --p:#a855f7;--b:#3b82f6;--c:#22d3ee;--pk:#ec4899;
+  --fh:'Exo 2','Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --fb:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);line-height:1.55;min-height:100vh;overflow-x:hidden;
+  background-image:
+    radial-gradient(900px 500px at 85% -5%,rgba(124,58,237,.28),transparent 60%),
+    radial-gradient(800px 500px at -10% 25%,rgba(59,130,246,.2),transparent 60%),
+    linear-gradient(rgba(139,92,246,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,.045) 1px,transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img{max-width:100%}
+h1,h2,h3{font-family:var(--fh);line-height:1.15}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 16px}
+.mut{color:var(--mut)}
+.grad{background:linear-gradient(90deg,var(--p),var(--b) 55%,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(6,5,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 4px 30px rgba(124,58,237,.18)}
+.hrow{display:flex;align-items:center;gap:14px;min-height:68px;position:relative}
+.logo{display:flex;flex-direction:column;margin-right:auto;min-width:0}
+.logo-t{font-family:var(--fh);font-weight:800;font-style:italic;font-size:26px;letter-spacing:2px;line-height:1;color:#fff;text-shadow:0 0 12px rgba(168,85,247,.8)}
+.logo-t b{background:linear-gradient(90deg,var(--p),var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 8px rgba(59,130,246,.7))}
+.logo-s{font-size:10px;letter-spacing:.6px;color:var(--mut);margin-top:4px;line-height:1.25}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{padding:9px 13px;border-radius:10px;font-weight:600;font-size:15px;color:#cfcdf5;transition:.2s}
+.nav a:hover{color:#fff;background:rgba(124,58,237,.18)}
+.nav a.act{color:#fff;background:rgba(124,58,237,.3);box-shadow:0 0 14px rgba(124,58,237,.55),inset 0 0 0 1px rgba(168,85,247,.6)}
+.cartbtn{display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:12px;font-weight:700;border:1.5px solid #6d5bff;background:rgba(109,91,255,.12);box-shadow:0 0 14px rgba(59,130,246,.35);position:relative;transition:.2s}
+.cartbtn:hover{box-shadow:0 0 22px rgba(124,58,237,.7)}
+.cartbtn.act{background:rgba(124,58,237,.35)}
+.cartbtn em{font-style:normal;min-width:22px;height:22px;border-radius:11px;background:#2a2560;color:#fff;font-size:12px;display:grid;place-items:center;padding:0 6px}
+.cartbtn em.on{background:linear-gradient(90deg,var(--p),var(--pk));box-shadow:0 0 10px var(--pk)}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1.5px solid #6d5bff;background:rgba(109,91,255,.12);flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.burger span{width:20px;height:2px;background:#fff;border-radius:2px;transition:.25s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:12px;border:0;font-weight:700;font-size:16px;color:#fff;transition:.2s;text-align:center}
+.btn.sm{min-height:42px;padding:9px 16px;font-size:14px}
+.btn-primary{background:linear-gradient(90deg,#7c3aed,#3b82f6);box-shadow:0 0 18px rgba(124,58,237,.6)}
+.btn-primary:hover{box-shadow:0 0 30px rgba(124,58,237,.95);transform:translateY(-2px)}
+.btn-ghost{background:rgba(109,91,255,.08);border:1.5px solid #6d5bff;box-shadow:inset 0 0 12px rgba(109,91,255,.25),0 0 12px rgba(59,130,246,.3)}
+.btn-ghost:hover{background:rgba(109,91,255,.22);transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+
+/* ---------- RGB card ---------- */
+.rgb{--a:0deg;position:relative;display:flex;padding:2px;border-radius:20px;isolation:isolate;
+  background:conic-gradient(from var(--a),#a855f7,#3b82f6,#22d3ee,#ec4899,#a855f7);animation:ang 6s linear infinite;transition:transform .25s}
+.rgb::after{content:"";position:absolute;inset:0;border-radius:20px;background:inherit;filter:blur(16px);opacity:.42;z-index:-1;transition:opacity .25s}
+.rgb:hover{transform:translateY(-5px)}
+.rgb:hover::after{opacity:.75}
+.rgb>.in{flex:1;min-width:0;background:var(--card);border-radius:18px;position:relative}
+@keyframes ang{to{--a:360deg}}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 26px}
+.hero-g{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--c);border:1px solid rgba(34,211,238,.4);padding:5px 12px;border-radius:20px;margin-bottom:16px;box-shadow:0 0 12px rgba(34,211,238,.25)}
+.hero h1{font-weight:800;font-size:clamp(34px,7.4vw,66px);letter-spacing:1px;text-transform:uppercase;text-shadow:0 0 28px rgba(168,85,247,.55)}
+.hero h1 span{display:block;background:linear-gradient(90deg,var(--p),var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(59,130,246,.55))}
+.hero p.lead{font-size:clamp(16px,2.4vw,20px);color:#cfcdf5;max-width:520px;margin:18px 0 26px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.badges span{font-size:13px;color:#cfcdf5;background:rgba(124,58,237,.12);border:1px solid var(--line);padding:7px 12px;border-radius:10px}
+.hero-vis{display:grid;place-items:center;position:relative}
+
+/* ---------- sections ---------- */
+.sec{padding:34px 0}
+.sec-h{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:22px}
+.sec-h h2,.page-h h1{font-size:clamp(26px,5vw,38px);font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.sec-h h2::after,.page-h h1::after{content:"";display:block;width:70px;height:4px;border-radius:3px;margin-top:10px;background:linear-gradient(90deg,var(--p),var(--c));box-shadow:0 0 12px var(--p)}
+.page-h{padding:30px 0 6px}
+.page-h p{color:var(--mut);margin-top:10px;max-width:640px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:24px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tile .in{padding:26px 22px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.tile .ic{font-size:34px;filter:drop-shadow(0 0 10px var(--p))}
+.tile h3{font-size:22px}
+.tile p{color:var(--mut);font-size:14px}
+
+/* ---------- product card ---------- */
+.pcard{padding:14px 16px 16px;display:flex;flex-direction:column;height:100%}
+.tag{position:absolute;top:12px;left:12px;z-index:3;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:8px;background:linear-gradient(90deg,var(--pk),var(--p));box-shadow:0 0 12px var(--pk)}
+.pcard h3{font-size:20px;font-weight:800;letter-spacing:.5px;margin:4px 0 8px}
+.pcard h3 a:hover{color:var(--c)}
+.mini{list-style:none;font-size:13.5px;color:var(--mut);display:grid;gap:3px;margin-bottom:14px}
+.mini li::before{content:"▸ ";color:var(--p)}
+.buy{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.price{font-family:var(--fh);font-weight:800;font-size:26px;color:#fff;text-shadow:0 0 14px rgba(59,130,246,.7)}
+.btns{display:flex;gap:8px}
+.btns .btn{flex:1}
+
+/* ---------- item card (components / peripherals) ---------- */
+.icard{padding:18px;display:flex;flex-direction:column;gap:8px;height:100%}
+.icon{width:72px;height:72px;border-radius:18px;display:grid;place-items:center;font-size:36px;background:radial-gradient(circle,rgba(124,58,237,.4),rgba(59,130,246,.08));box-shadow:inset 0 0 0 1px rgba(168,85,247,.5),0 0 20px rgba(124,58,237,.4)}
+.icard h3{font-size:17px;font-weight:700}
+.icard p{font-size:13.5px;color:var(--mut)}
+.icard .buy{margin-top:auto;padding-top:8px}
+
+/* ---------- filters ---------- */
+.tools{display:flex;gap:10px;margin:20px 0 12px}
+.search{flex:1;display:flex;align-items:center;gap:10px;background:#0d0a22;border:1.5px solid #3b2f8f;border-radius:12px;padding:0 14px;min-height:50px;box-shadow:0 0 16px rgba(124,58,237,.25)}
+.search:focus-within{border-color:var(--c);box-shadow:0 0 20px rgba(34,211,238,.4)}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:16px}
+.search input::placeholder{color:#6f6da3}
+.ftoggle{display:none}
+.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(15,12,38,.7);margin-bottom:14px}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--mut);letter-spacing:.3px}
+.in-f,select.in-f{width:100%;min-height:44px;background:#0a0820;border:1.5px solid #30287a;border-radius:10px;padding:0 12px;outline:0;font-size:15px;color:var(--txt)}
+.in-f:focus{border-color:var(--p);box-shadow:0 0 12px rgba(168,85,247,.5)}
+select.in-f{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,#a855f7 50%),linear-gradient(135deg,#a855f7 50%,transparent 50%);background-position:calc(100% - 18px) 19px,calc(100% - 13px) 19px;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
+select option{background:#0f0c26;color:#ecebff}
+.count{color:var(--mut);margin:6px 0 16px;font-size:14px}
+.empty{text-align:center;padding:50px 16px;color:var(--mut)}
+.empty .big{font-size:46px}
+
+/* ---------- 3D PC ---------- */
+.scene{--u:10px;position:relative;width:100%;height:calc(var(--u)*24);display:grid;place-items:center;perspective:calc(var(--u)*85);touch-action:pan-y}
+.scene.sm{--u:9px}
+.scene.hero3{--u:13px}
+.scene.lg{--u:17px}
+.scene::before{content:"";position:absolute;left:50%;bottom:calc(var(--u)*.6);width:calc(var(--u)*20);height:calc(var(--u)*4);transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(168,85,247,.65),rgba(59,130,246,.25) 45%,transparent 70%);filter:blur(5px);animation:hue 10s linear infinite}
+.pc{position:relative;width:calc(var(--u)*9);height:calc(var(--u)*19);transform-style:preserve-3d;transform:rotateX(-10deg) rotateY(30deg)}
+.pc.auto{animation:spin 18s linear infinite}
+@keyframes spin{from{transform:rotateX(-10deg) rotateY(0deg)}to{transform:rotateX(-10deg) rotateY(360deg)}}
+@keyframes hue{from{filter:hue-rotate(var(--ho,0deg))}to{filter:hue-rotate(calc(var(--ho,0deg) + 360deg))}}
+@keyframes rot{to{transform:rotate(360deg)}}
+.face{position:absolute;left:50%;top:50%;overflow:hidden;background:#0b0920;border:1px solid rgba(139,92,246,.5);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.f-front,.f-back{width:calc(var(--u)*9);height:calc(var(--u)*19);margin:calc(var(--u)*-9.5) 0 0 calc(var(--u)*-4.5)}
+.f-front{transform:translateZ(calc(var(--u)*8.5))}
+.f-back{transform:rotateY(180deg) translateZ(calc(var(--u)*8.5))}
+.f-right,.f-left{width:calc(var(--u)*17);height:calc(var(--u)*19);margin:calc(var(--u)*-9.5) 0 0 calc(var(--u)*-8.5)}
+.f-right{transform:rotateY(90deg) translateZ(calc(var(--u)*4.5))}
+.f-left{transform:rotateY(-90deg) translateZ(calc(var(--u)*4.5))}
+.f-top,.f-bottom{width:calc(var(--u)*9);height:calc(var(--u)*17);margin:calc(var(--u)*-8.5) 0 0 calc(var(--u)*-4.5)}
+.f-top{transform:rotateX(90deg) translateZ(calc(var(--u)*9.5))}
+.f-bottom{transform:rotateX(-90deg) translateZ(calc(var(--u)*9.5))}
+.f-front{background:radial-gradient(circle,rgba(255,255,255,.09) 1px,transparent 1.6px) 0 0/calc(var(--u)*.5) calc(var(--u)*.5),linear-gradient(160deg,#17123b,#080616)}
+.f-left{background:#07061a}
+.gsvg{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.lights.gl{animation-name:hue2}
+@keyframes hue2{from{filter:drop-shadow(0 0 calc(var(--u)*.35) #a855f7) hue-rotate(var(--ho,0deg))}to{filter:drop-shadow(0 0 calc(var(--u)*.35) #a855f7) hue-rotate(calc(var(--ho,0deg) + 360deg))}}
+.f-top{background:repeating-linear-gradient(90deg,#0b0920 0 calc(var(--u)*.5),#17123b calc(var(--u)*.5) calc(var(--u)*.7))}
+.f-right{display:grid;place-items:center;background:linear-gradient(120deg,#13102f,#07050f)}
+.f-back{background:linear-gradient(160deg,#120e2e,#07050f)}
+.side-t{font-family:var(--fh);font-style:italic;font-weight:800;letter-spacing:calc(var(--u)*.35);font-size:calc(var(--u)*1.7);color:#6d5bff;text-shadow:0 0 calc(var(--u)*1) var(--p);transform:rotate(-90deg);white-space:nowrap}
+.lights{position:absolute;inset:0;animation:hue 10s linear infinite}
+.fan{position:absolute;width:calc(var(--u)*var(--s,5));height:calc(var(--u)*var(--s,5));border-radius:50%;background:conic-gradient(#a855f7,#3b82f6,#22d3ee,#6366f1,#ec4899,#a855f7);box-shadow:0 0 calc(var(--u)*1.1) rgba(139,92,246,.85)}
+.fan::before{content:"";position:absolute;inset:11%;border-radius:50%;background:repeating-conic-gradient(#08051a 0 14deg,#1d1546 14deg 28deg)}
+.fan::after{content:"";position:absolute;inset:38%;border-radius:50%;background:radial-gradient(#2c2263,#07050f)}
+.scene:not(.sm) .fan{animation:rot 3s linear infinite}
+.scene.sm:hover .fan{animation:rot 3s linear infinite}
+.mb{position:absolute;left:calc(var(--u)*6.9);top:calc(var(--u)*.7);width:calc(var(--u)*9.7);height:calc(var(--u)*13.6);background:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1.5px) 0 0/calc(var(--u)*.6) calc(var(--u)*.6),#0e0b26;border:1px solid rgba(139,92,246,.35)}
+.psu{position:absolute;left:calc(var(--u)*6.4);top:calc(var(--u)*15.4);width:calc(var(--u)*10.6);height:calc(var(--u)*3);background:linear-gradient(90deg,#14102e,#0a0820);border:1px solid rgba(139,92,246,.4);display:grid;place-items:center;font-size:calc(var(--u)*.9);letter-spacing:calc(var(--u)*.3);color:#4a3fa0;font-family:var(--fh);font-weight:800}
+.ram{position:absolute;width:calc(var(--u)*.45);height:calc(var(--u)*5.2);border-radius:calc(var(--u)*.2);background:linear-gradient(#22d3ee,#a855f7,#ec4899);box-shadow:0 0 calc(var(--u)*.9) rgba(168,85,247,.9)}
+.gpu{position:absolute;width:calc(var(--u)*8.8);height:calc(var(--u)*2.8);background:linear-gradient(#1b1640,#0c0924);border:1px solid rgba(168,85,247,.7);border-radius:calc(var(--u)*.3);box-shadow:0 0 calc(var(--u)*1.2) rgba(59,130,246,.6)}
+.gpu .fan{box-shadow:0 0 calc(var(--u)*.6) rgba(139,92,246,.8)}
+.strip{position:absolute;height:calc(var(--u)*.22);background:linear-gradient(90deg,#a855f7,#22d3ee,#ec4899);box-shadow:0 0 calc(var(--u)*.8) #a855f7}
+.edge{position:absolute;left:0;top:0;bottom:0;width:calc(var(--u)*.28);background:linear-gradient(#a855f7,#22d3ee,#ec4899);box-shadow:0 0 calc(var(--u)*1) #a855f7}
+.refl{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.13) 0 16%,transparent 16% 38%,rgba(255,255,255,.06) 38% 43%,transparent 43%);pointer-events:none}
+.io{position:absolute;background:#241c55;border:1px solid #3a2f8a}
+
+/* product page */
+.pp{padding-bottom:20px}
+.back{display:inline-block;margin:22px 0 14px;color:var(--c);font-weight:600}
+.back:hover{text-shadow:0 0 10px var(--c)}
+.pgrid{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:start}
+.viewer .in{padding:14px 14px 18px;overflow:hidden}
+.stage{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y;background:radial-gradient(ellipse at 50% 55%,rgba(124,58,237,.3),transparent 65%)}
+.stage:active{cursor:grabbing}
+.vctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.vctl button{min-height:40px;padding:0 14px;border-radius:10px;border:1.5px solid #3b2f8f;background:#0a0820;font-weight:600;font-size:14px}
+.vctl button.on{border-color:var(--c);box-shadow:0 0 14px rgba(34,211,238,.5);color:#fff}
+.hint{text-align:center;color:var(--mut);font-size:12.5px;margin-top:10px}
+.pinfo h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:.5px}
+.pprice{font-family:var(--fh);font-weight:800;font-size:clamp(30px,6vw,42px);margin:10px 0;color:#fff;text-shadow:0 0 18px rgba(59,130,246,.8)}
+.pinfo .desc{color:#cfcdf5;margin-bottom:18px}
+.qty{display:inline-flex;align-items:center;border:1.5px solid #3b2f8f;border-radius:12px;overflow:hidden;background:#0a0820}
+.qty button{width:44px;height:46px;border:0;background:transparent;font-size:22px;font-weight:700}
+.qty button:hover{background:rgba(124,58,237,.3)}
+.qty span{min-width:36px;text-align:center;font-weight:700}
+.buyrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
+.perf{display:grid;gap:12px}
+.perf div.r{display:grid;grid-template-columns:120px 1fr 40px;gap:10px;align-items:center;font-size:14px}
+.bar{height:9px;border-radius:6px;background:#1a1640;overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);border-radius:6px;background:linear-gradient(90deg,#7c3aed,#22d3ee);box-shadow:0 0 10px #7c3aed}
+.spec{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0 30px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(15,12,38,.7)}
+.spec td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.spec tr:last-child td{border-bottom:0}
+.spec td:first-child{width:26%;color:var(--mut)}
+.spec td.pr{width:1%;white-space:nowrap;text-align:right;color:#fff}
+.spec tr.tot td{background:rgba(124,58,237,.18);font-weight:800;font-size:17px}
+.spec td:last-child{font-weight:600}
+h2.h2{font-size:26px;font-weight:800;margin:30px 0 12px;text-transform:uppercase}
+
+/* cart */
+.cgrid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start;margin-top:20px}
+.crow{display:grid;grid-template-columns:56px 1fr auto;gap:8px 14px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.crow .icon{width:56px;height:56px;font-size:28px;border-radius:14px}
+.crow h4{font-size:16px;font-family:var(--fh)}
+.crow h4 a:hover{color:var(--c)}
+.crow .u{color:var(--mut);font-size:13px}
+.crow .ctl{grid-column:2/4;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.crow .lt{font-family:var(--fh);font-weight:800;font-size:18px}
+.rm{width:40px;height:40px;border-radius:10px;border:1.5px solid #4b2a62;background:rgba(236,72,153,.1);color:#ff8ad0}
+.sum .in{padding:20px}
+.sum .row{display:flex;justify-content:space-between;padding:8px 0;color:#cfcdf5}
+.sum .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:14px;font-family:var(--fh);font-size:24px;font-weight:800;color:#fff}
+.sum .tot b{text-shadow:0 0 14px var(--b)}
+.form-g{display:grid;gap:12px;margin-top:16px}
+textarea.in-f{padding:12px;min-height:130px;resize:vertical}
+.err{color:#ff7aa8;font-size:12.5px;min-height:0}
+.ok{padding:22px;text-align:center}
+.ok .big{font-size:50px}
+
+/* contacts */
+.cont-g{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px;align-items:start}
+.info .in,.formc .in{padding:22px}
+.irow{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.irow:last-child{border-bottom:0}
+.irow .ic{font-size:24px}
+.irow a{color:var(--c)}
+.irow small{display:block;color:var(--mut)}
+.dl{list-style:none;display:grid;gap:8px;margin-top:8px;color:#cfcdf5}
+.dl li::before{content:"✔ ";color:var(--c)}
+
+/* why */
+.why{padding:40px 0 20px}
+.why-g{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.why .in{padding:20px 16px;text-align:left}
+.why .ic{font-size:30px;filter:drop-shadow(0 0 8px var(--p))}
+.why h3{font-size:16.5px;margin:10px 0 6px}
+.why p{font-size:13.5px;color:var(--mut)}
+
+/* footer */
+.ftr{margin-top:40px;border-top:1px solid var(--line);background:linear-gradient(#07050f,#04030a);position:relative}
+.ftr::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--p),var(--b),var(--c),transparent);box-shadow:0 0 14px var(--p)}
+.ftr-g{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:26px;padding:34px 0 22px}
+.ftr h4{font-family:var(--fh);margin-bottom:10px}
+.ftr ul{list-style:none;display:grid;gap:8px;color:var(--mut)}
+.ftr a:hover{color:var(--c)}
+.ftr .copy{border-top:1px solid var(--line);padding:16px 0 24px;text-align:center;color:#6f6da3;font-size:13px}
+.linkbtn{background:none;border:0;color:var(--mut);text-align:left;padding:0}
+.linkbtn:hover{color:var(--c)}
+
+/* modal / toast */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(3,2,10,.8);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px}
+.modal .rgb{width:100%;max-width:520px;transform:none!important}
+.mbody{padding:24px 22px;max-height:86vh;overflow:auto;display:grid;gap:14px}
+.mbody h2{font-size:26px}
+.mx{position:absolute;right:10px;top:10px;width:40px;height:40px;border-radius:10px;border:1.5px solid #3b2f8f;background:#0a0820;z-index:2}
+.res{border:1px solid var(--line);border-radius:14px;padding:16px;background:rgba(124,58,237,.1);display:grid;gap:8px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;z-index:120;background:#15103a;border:1.5px solid var(--p);box-shadow:0 0 22px rgba(124,58,237,.7);padding:12px 20px;border-radius:12px;font-weight:600;transition:.3s;pointer-events:none;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- responsive ---------- */
+@media(max-width:1020px){
+  .why-g{grid-template-columns:repeat(3,1fr)}
+  .filters{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:860px){
+  .nav{position:absolute;top:100%;left:-16px;right:-16px;background:rgba(8,6,20,.98);border-bottom:1px solid var(--line);display:none;flex-direction:column;align-items:stretch;padding:10px 16px 16px;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+  .nav.open{display:flex}
+  .nav a{padding:15px 14px;font-size:17px}
+  .burger{display:flex}
+  .cartbtn .cl{display:none}
+  .cartbtn{padding:0 12px}
+  .hero-g,.pgrid,.cgrid,.cont-g{grid-template-columns:1fr}
+  .hero{padding-top:22px}
+  .scene.hero3{--u:10.5px}
+  .scene.lg{--u:13px}
+  .tiles{grid-template-columns:1fr}
+  .ftr-g{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .grid{grid-template-columns:1fr}
+  .ftoggle{display:inline-flex}
+  .filters{display:none;grid-template-columns:1fr 1fr}
+  .filters.open{display:grid}
+  .filters .btn{grid-column:1/-1}
+  .why-g{grid-template-columns:1fr 1fr}
+  .why-g .rgb:last-child{grid-column:1/-1}
+  .logo-t{font-size:22px}
+  .logo-s{font-size:9px;max-width:200px}
+  .perf div.r{grid-template-columns:96px 1fr 36px}
+  .crow{grid-template-columns:48px 1fr auto}
+  .spec td{padding:10px 8px;font-size:13px}
+  .spec tr.tot td{font-size:14px}
+}
+@media(max-width:360px){.why-g{grid-template-columns:1fr}.filters{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hrow">
+    <a class="logo" href="#/" aria-label="GAMEFORCE — на главную">
+      <span class="logo-t">GAME<b>FORCE</b></span>
+      <span class="logo-s">Игровые компьютеры · Комплектующие · Периферия</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Главное меню">
+      <a href="#/" data-nav="">Главная</a>
+      <a href="#/pc" data-nav="pc">Игровые ПК</a>
+      <a href="#/components" data-nav="components">Комплектующие</a>
+      <a href="#/peripherals" data-nav="peripherals">Периферия</a>
+      <a href="#/contacts" data-nav="contacts">Контакты</a>
+    </nav>
+    <a class="cartbtn" href="#/cart" data-nav="cart" aria-label="Корзина">🛒 <span class="cl">Корзина</span><em id="badge">0</em></a>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-g">
+      <div>
+        <a class="logo" href="#/" style="margin-bottom:12px"><span class="logo-t">GAME<b>FORCE</b></span><span class="logo-s">Игровые компьютеры · Комплектующие · Периферия</span></a>
+        <p class="mut" style="font-size:14px;max-width:320px">Мощные игровые компьютеры для побед, стримов и максимального FPS.</p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li>✉ <a href="mailto:support@gameforce.example">support@gameforce.example</a></li>
+          <li>☎ <a href="tel:+78000000000">+7 (800) 000-00-00</a></li>
+          <li>🕘 Ежедневно, 09:00–21:00</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Информация</h4>
+        <ul>
+          <li><button class="linkbtn" data-modal="warranty">Условия гарантии</button></li>
+          <li><a href="#/contacts">Доставка и оплата</a></li>
+          <li><a href="#/pc">Каталог игровых ПК</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 GAMEFORCE. Все права защищены.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:20px;text-align:center">Для работы сайта включите JavaScript.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var app=$('#app');
+var money=function(n){return n.toLocaleString('ru-RU')+' ₽'};
+var ssdL=function(v){return v>=1000?(v/1000)+' ТБ':v+' ГБ'};
+var FREE_FROM=50000, DELIVERY=990;
+var EMAIL='support@gameforce.example';
+
+/* ================= ДАННЫЕ ================= */
+/* Комплектующие: розничные цены DNS на 16.10.2026 (где указано src — минимальная цена на Ozon) */
+var ASSEMBLY=5000; /* сборка, тест и упаковка */
+var P={
+ r5500:{t:'Процессор',n:'AMD Ryzen 5 5500 BOX',s:'AMD Ryzen 5 5500',p:9999},
+ r7500f:{t:'Процессор',n:'AMD Ryzen 5 7500F BOX',s:'AMD Ryzen 5 7500F',p:14899},
+ r9800:{t:'Процессор',n:'AMD Ryzen 7 9800X3D BOX',s:'AMD Ryzen 7 9800X3D',p:46799},
+ g5060:{t:'Видеокарта',n:'MSI GeForce RTX 5060 VENTUS 2X OC, 8 ГБ',s:'GeForce RTX 5060',v:8,gt:1,p:49499},
+ g5070:{t:'Видеокарта',n:'GIGABYTE GeForce RTX 5070 WINDFORCE OC SFF, 12 ГБ',s:'GeForce RTX 5070',v:12,gt:2,p:89499},
+ g5070ti:{t:'Видеокарта',n:'Gainward GeForce RTX 5070 Ti Phoenix-S GS, 16 ГБ',s:'GeForce RTX 5070 Ti',v:16,gt:3,p:133000,src:'мин. цена на Ozon'},
+ g9070xt:{t:'Видеокарта',n:'GIGABYTE Radeon RX 9070 XT Gaming OC Ice, 16 ГБ',s:'Radeon RX 9070 XT',v:16,gt:3,p:98000,src:'мин. цена на Ozon'},
+ g5080:{t:'Видеокарта',n:'Palit GeForce RTX 5080 GamingPro, 16 ГБ',s:'GeForce RTX 5080',v:16,gt:3,p:174999},
+ g5090:{t:'Видеокарта',n:'ASUS TUF Gaming GeForce RTX 5090 OC, 32 ГБ',s:'GeForce RTX 5090',v:32,gt:4,p:799999},
+ b550:{t:'Материнская плата',n:'GIGABYTE B550M K',s:'B550',p:7099},
+ b650:{t:'Материнская плата',n:'MSI PRO B650M-P',s:'B650',p:9399},
+ x870e:{t:'Материнская плата',n:'MSI MAG X870E TOMAHAWK WIFI',s:'X870E',p:37299},
+ d4_16:{t:'Оперативная память',n:'G.Skill Aegis DDR4-3200, 2×8 ГБ',gb:16,type:'DDR4',p:13999},
+ d5_32:{t:'Оперативная память',n:'ADATA XPG Lancer Blade DDR5-5600, 2×16 ГБ',gb:32,type:'DDR5',p:48999},
+ d5_64:{t:'Оперативная память',n:'Kingston FURY Beast DDR5-5600, 2×32 ГБ',gb:64,type:'DDR5',p:99999},
+ s1a:{t:'Накопитель',n:'ADATA LEGEND 710, 1 ТБ NVMe',gb:1000,p:13199},
+ s1k:{t:'Накопитель',n:'Kingston NV3, 1 ТБ NVMe',gb:1000,p:15999},
+ s2:{t:'Накопитель',n:'Apacer AS2280Q4U, 2 ТБ NVMe',gb:2000,p:28799},
+ psu850t:{t:'Блок питания',n:'Thermaltake Smart BM3 850W',s:'850 Вт',p:6299},
+ psu850c:{t:'Блок питания',n:'Chieftec ATMOS 850W',s:'850 Вт',p:8399},
+ psu1200:{t:'Блок питания',n:'Thermaltake Toughpower GF3 1200W',s:'1200 Вт',p:17399},
+ cs55:{t:'Корпус',n:'DEEPCOOL MATREXX 55 MESH',p:4199},
+ cg530:{t:'Корпус',n:'DEEPCOOL CG530 4F',p:6399},
+ ck560:{t:'Корпус',n:'DEEPCOOL CK560',p:9199},
+ lm360:{t:'Охлаждение',n:'DEEPCOOL LM360 (СЖО 360 мм)',p:9099},
+ box:{t:'Охлаждение',n:'Боксовый кулер из комплекта процессора',p:0}
+};
+var T_ORDER=['Процессор','Видеокарта','Материнская плата','Оперативная память','Накопитель','Блок питания','Охлаждение','Корпус'];
+var B=[
+{id:'start',name:'GAMEFORCE START',tag:'Бюджетный',ho:0,perf:[62,38,15,30],parts:['r5500','g5060','b550','d4_16','s1a','psu850t','cs55','box'],
+ desc:'Недорогая сборка для комфортной игры в Full HD: Ryzen 5 5500 и GeForce RTX 5060. Хороший выбор для популярных соревновательных игр и первого игрового ПК.'},
+{id:'base',name:'GAMEFORCE BASE',tag:'',ho:-35,perf:[68,45,18,40],parts:['r7500f','g5060','b650','d5_32','s1k','psu850t','cs55','box'],
+ desc:'Платформа AM5 с памятью DDR5 и запасом для апгрейда: Ryzen 5 7500F и RTX 5060. Позже можно заменить процессор и видеокарту, не меняя материнскую плату.'},
+{id:'main',name:'GAMEFORCE MAIN',tag:'Хит',ho:40,perf:[82,70,40,55],parts:['r7500f','g5070','b650','d5_32','s1k','psu850c','cg530','box'],
+ desc:'Сбалансированная сборка для игр в 1440p: Ryzen 5 7500F и GeForce RTX 5070 с 12 ГБ памяти. «Золотая середина» по цене и производительности.'},
+{id:'radeon',name:'GAMEFORCE RADEON',tag:'',ho:85,perf:[90,80,55,58],parts:['r7500f','g9070xt','b650','d5_32','s1k','psu850c','cg530','box'],
+ desc:'Ryzen 5 7500F и Radeon RX 9070 XT с 16 ГБ видеопамяти — для тех, кому нужен запас по памяти в 1440p и комфортный 4K с апскейлингом.'},
+{id:'x3d',name:'GAMEFORCE X3D',tag:'Топ',ho:130,perf:[95,85,62,72],parts:['r9800','g5070ti','b650','d5_32','s1k','psu850c','cg530','lm360'],
+ desc:'Ryzen 7 9800X3D — один из лучших игровых процессоров — в паре с GeForce RTX 5070 Ti 16 ГБ и жидкостным охлаждением 360 мм.'},
+{id:'pro',name:'GAMEFORCE PRO 4K',tag:'Новинка',ho:-80,perf:[98,93,80,92],parts:['r9800','g5080','x870e','d5_64','s2','psu1200','ck560','lm360'],
+ desc:'Сборка уровня 4K: Ryzen 7 9800X3D, GeForce RTX 5080, 64 ГБ DDR5 и 2 ТБ NVMe. Блок питания 1200 Вт и СЖО 360 мм — с запасом.'},
+{id:'extreme',name:'GAMEFORCE EXTREME',tag:'Максимум',ho:170,perf:[100,100,98,100],parts:['r9800','g5090','x870e','d5_64','s2','psu1200','ck560','lm360'],
+ desc:'Максимум без компромиссов: GeForce RTX 5090 32 ГБ, Ryzen 7 9800X3D и 64 ГБ DDR5. Для 4K на максимальных настройках, трассировки лучей и работы с графикой.'}
+];
+var PCS=B.map(function(b){
+  var ps=b.parts.map(function(k){return P[k]}).sort(function(a,c){return T_ORDER.indexOf(a.t)-T_ORDER.indexOf(c.t)});
+  function by(t){return ps.filter(function(x){return x.t===t})[0]}
+  b.parts=ps;
+  b.sum=ps.reduce(function(a,x){return a+x.p},0);
+  b.price=b.sum+ASSEMBLY;
+  b.gt=by('Видеокарта').gt;b.aio=ps.some(function(x){return x.n.indexOf('LM360')>=0});b.cpu=by('Процессор').s;b.gpu=by('Видеокарта').s;b.vram=by('Видеокарта').v;
+  b.ram=by('Оперативная память').gb;b.ramT=by('Оперативная память').type;b.ssd=by('Накопитель').gb;
+  return b;
+});
+var ICONS={'Процессор':'🧠','Видеокарта':'🎮','Материнская плата':'🧱','Оперативная память':'🧩','Накопитель':'💾','Блок питания':'⚡','Охлаждение':'🧊','Корпус':'🗄️'};
+var ITEMS=Object.keys(P).filter(function(k){return k!=='box'}).map(function(k){
+  var x=P[k];
+  return {id:'c_'+k,cat:'components',icon:ICONS[x.t],name:x.n,price:x.p,desc:x.t+(x.src?' · цена: '+x.src:' · цена DNS на 16.10.2026')};
+}).concat([
+{id:'p1',cat:'peripherals',icon:'🖱️',name:'Игровая мышь 26 000 DPI, 60 г',price:4990,desc:'Лёгкая беспроводная мышь для шутеров.'},
+{id:'p2',cat:'peripherals',icon:'⌨️',name:'Механическая клавиатура RGB (hot-swap)',price:7990,desc:'Быстрые переключатели и яркая подсветка.'},
+{id:'p3',cat:'peripherals',icon:'🎧',name:'Игровая гарнитура 7.1',price:5990,desc:'Объёмный звук и чистый микрофон.'},
+{id:'p4',cat:'peripherals',icon:'🖥️',name:'Монитор 27" 2K 180 Гц IPS',price:24990,desc:'Яркие цвета и высокая плавность картинки.'},
+{id:'p5',cat:'peripherals',icon:'📺',name:'Монитор 24.5" Full HD 240 Гц',price:15990,desc:'Для киберспорта: минимальная задержка.'},
+{id:'p6',cat:'peripherals',icon:'🟪',name:'Коврик XL с RGB-подсветкой',price:2490,desc:'Большая поверхность для точного управления.'},
+{id:'p7',cat:'peripherals',icon:'🪑',name:'Игровое кресло с поддержкой поясницы',price:17990,desc:'Комфорт для долгих игровых сессий.'},
+{id:'p8',cat:'peripherals',icon:'📷',name:'Веб-камера 1080p 60 к/с',price:4490,desc:'Чёткое изображение для стримов.'},
+{id:'p9',cat:'peripherals',icon:'🎙️',name:'USB-микрофон для стримов',price:6990,desc:'Студийный звук, шумоподавление.'}
+]);
+var ALL={};PCS.concat(ITEMS).forEach(function(x){ALL[x.id]=x});
+var CATS={
+ components:{title:'Комплектующие',sub:'Реальные модели видеокарт, процессоров, памяти и накопителей. Цены — розничные, DNS на 16.10.2026 (где указано — минимальные на Ozon).'},
+ peripherals:{title:'Периферия',sub:'Мониторы, мыши, клавиатуры, гарнитуры и аксессуары для комфортной игры.'}
+};
+
+/* ================= КОРЗИНА ================= */
+var cart={};
+try{cart=JSON.parse(localStorage.getItem('gf_cart')||'{}')||{}}catch(e){cart={}}
+Object.keys(cart).forEach(function(k){if(!ALL[k]||!(cart[k]>0))delete cart[k]});
+function saveCart(){try{localStorage.setItem('gf_cart',JSON.stringify(cart))}catch(e){}updateBadge()}
+function cartCount(){return Object.keys(cart).reduce(function(a,k){return a+cart[k]},0)}
+function updateBadge(){var n=cartCount(),b=$('#badge');b.textContent=n;b.classList.toggle('on',n>0)}
+function addToCart(id,q){if(!ALL[id])return;cart[id]=Math.min(99,(cart[id]||0)+(q||1));saveCart();toast('Добавлено в корзину: '+ALL[id].name)}
+function totals(){var s=0;Object.keys(cart).forEach(function(k){s+=ALL[k].price*cart[k]});var sh=s===0?0:(s>=FREE_FROM?0:DELIVERY);return{sum:s,ship:sh,total:s+sh}}
+var toastT;
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show')},2200)}
+
+/* ================= 3D ПК ================= */
+function at(x,y){return 'left:calc(var(--u)*'+x+');top:calc(var(--u)*'+y+')'}
+function fan(x,y,s){return '<i class="fan" style="'+at(x,y)+';--s:'+s+'"></i>'}
+function glassSVG(p){
+  var k=p.id,gt=p.gt,aio=p.aio;
+  var gh=[0,24,28,33,40][gt],gx1=[0,86,94,100,108][gt],gy=96,fx=142,i,y;
+  var defs='<defs>'
+   +'<linearGradient id="bg-'+k+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0820"/><stop offset="1" stop-color="#150d34"/></linearGradient>'
+   +'<linearGradient id="bd-'+k+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171236"/><stop offset="1" stop-color="#0a0820"/></linearGradient>'
+   +'<linearGradient id="mt-'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5694"/><stop offset=".5" stop-color="#2c2956"/><stop offset="1" stop-color="#17152f"/></linearGradient>'
+   +'<linearGradient id="fn-'+k+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#262250"/><stop offset="1" stop-color="#0b0920"/></linearGradient>'
+   +'<linearGradient id="gp-'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3768"/><stop offset=".15" stop-color="#262345"/><stop offset="1" stop-color="#0c0a20"/></linearGradient>'
+   +'<linearGradient id="sh-'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2850"/><stop offset="1" stop-color="#0b0a1e"/></linearGradient>'
+   +'<linearGradient id="rm-'+k+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8d8bb5"/><stop offset=".5" stop-color="#4d4b78"/><stop offset="1" stop-color="#2a284a"/></linearGradient>'
+   +'<radialGradient id="pm-'+k+'" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#3a3768"/><stop offset="1" stop-color="#0c0b22"/></radialGradient>'
+   +'<linearGradient id="rf-'+k+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+   +'<pattern id="fin-'+k+'" width="2.4" height="2.4" patternUnits="userSpaceOnUse"><rect width="2.4" height="1.2" fill="#0a0920"/><rect y="1.2" width="2.4" height="1.2" fill="#4a4680"/></pattern>'
+   +'<pattern id="dt-'+k+'" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".45" fill="#3a3478" opacity=".6"/></pattern>'
+   +'</defs>';
+  var o=defs+'<rect width="170" height="190" fill="url(#bg-'+k+')"/>';
+  // rear exhaust fan (edge-on)
+  o+='<rect x="4" y="12" width="24" height="44" rx="2" fill="url(#fn-'+k+')" stroke="#2c2858" stroke-width=".6"/><rect x="8" y="16" width="3" height="36" rx="1" fill="#050414"/>';
+  // motherboard
+  o+='<rect x="30" y="8" width="84" height="134" rx="2" fill="url(#bd-'+k+')" stroke="#2a2460" stroke-width=".7"/><rect x="30" y="8" width="84" height="134" fill="url(#dt-'+k+')"/>';
+  // I/O shroud + VRM heatsinks
+  o+='<rect x="30" y="8" width="22" height="22" rx="1.5" fill="#15122e" stroke="#3a3478" stroke-width=".6"/><path d="M33 12l16 16M33 18l16 16M33 24l10 10" stroke="#2a2662" stroke-width=".8"/>';
+  o+='<rect x="54" y="10" width="46" height="12" rx="1.5" fill="url(#mt-'+k+')" stroke="#4a4680" stroke-width=".4"/><rect x="54" y="10" width="46" height="12" rx="1.5" fill="url(#fin-'+k+')" opacity=".55"/>';
+  o+='<rect x="32" y="32" width="12" height="34" rx="1.5" fill="url(#mt-'+k+')" stroke="#4a4680" stroke-width=".4"/><rect x="32" y="32" width="12" height="34" rx="1.5" fill="url(#fin-'+k+')" opacity=".55"/>';
+  // RAM
+  for(i=0;i<4;i++){o+='<rect x="'+(96+i*4.4)+'" y="14" width="3.4" height="52" rx=".6" fill="url(#rm-'+k+')" stroke="#15132c" stroke-width=".3"/><rect x="'+(96+i*4.4)+'" y="14" width="3.4" height="4" rx=".6" fill="#15132c"/>'}
+  // M.2 heatsink
+  o+='<rect x="52" y="82" width="34" height="7" rx="1" fill="url(#mt-'+k+')" stroke="#4a4680" stroke-width=".4"/>';
+  // CPU cooler
+  if(aio){
+    o+='<path d="M88 40C100 32 106 26 118 26" fill="none" stroke="#08071a" stroke-width="5.5" stroke-linecap="round"/><path d="M88 40C100 32 106 26 118 26" fill="none" stroke="#3a3768" stroke-width="1" stroke-linecap="round" transform="translate(0,-1.4)"/>'
+     +'<path d="M88 54C102 54 106 66 118 66" fill="none" stroke="#08071a" stroke-width="5.5" stroke-linecap="round"/><path d="M88 54C102 54 106 66 118 66" fill="none" stroke="#3a3768" stroke-width="1" stroke-linecap="round" transform="translate(0,-1.4)"/>'
+     +'<circle cx="76" cy="46" r="17" fill="url(#pm-'+k+')" stroke="#3a3478" stroke-width=".8"/><circle cx="76" cy="46" r="11" fill="#07061a" stroke="#221e52" stroke-width=".6"/>';
+  }else{
+    o+='<rect x="60" y="34" width="32" height="26" rx="3" fill="url(#mt-'+k+')" stroke="#4a4680" stroke-width=".4"/><rect x="60" y="34" width="32" height="26" rx="3" fill="url(#fin-'+k+')" opacity=".5"/><rect x="60" y="34" width="32" height="6" rx="3" fill="#15132c"/>';
+  }
+  // front: radiator + fans (edge-on)
+  if(aio){o+='<rect x="118" y="10" width="24" height="136" rx="2" fill="url(#mt-'+k+')" stroke="#4a4680" stroke-width=".5"/><rect x="118" y="10" width="24" height="136" rx="2" fill="url(#fin-'+k+')" opacity=".6"/><rect x="118" y="10" width="4" height="12" fill="#08071a"/><rect x="118" y="50" width="4" height="30" fill="#08071a" opacity=".0"/>'}
+  for(i=0;i<3;i++){y=10+i*46;o+='<rect x="'+fx+'" y="'+y+'" width="24" height="44" rx="2" fill="url(#fn-'+k+')" stroke="#2c2858" stroke-width=".6"/><rect x="'+(fx+9)+'" y="'+(y+4)+'" width="3" height="36" rx="1" fill="#050414" opacity=".9"/>'}
+  // GPU
+  o+='<rect x="32" y="'+gy+'" width="'+(gx1-32)+'" height="'+gh+'" rx="3" fill="url(#gp-'+k+')" stroke="#4a4680" stroke-width=".6"/>'
+   +'<rect x="26" y="'+(gy-4)+'" width="6" height="'+(gh+8)+'" rx="1" fill="#3a3768"/>'
+   +'<path d="M40 '+(gy+gh-5)+'H'+(gx1-8)+'" stroke="#0a0920" stroke-width="1.2" stroke-dasharray="3 2"/>'
+   +'<rect x="'+(gx1-22)+'" y="'+(gy-4)+'" width="12" height="5" rx="1" fill="#0a0918" stroke="#3a3478" stroke-width=".4"/>'
+   +'<path d="M'+(gx1-16)+' '+(gy-4)+'C'+(gx1-16)+' '+(gy-20)+' '+(gx1+4)+' '+(gy-22)+' '+(gx1+6)+' '+(gy-44)+'" fill="none" stroke="#06050f" stroke-width="3" stroke-linecap="round"/>';
+  // PSU shroud
+  o+='<rect x="12" y="150" width="156" height="34" rx="2" fill="url(#sh-'+k+')" stroke="#3a3478" stroke-width=".7"/>';
+  for(i=0;i<9;i++){o+='<rect x="'+(98+i*6.4)+'" y="156" width="3.2" height="22" rx="1.4" fill="#05040f"/>'}
+  o+='<rect x="22" y="158" width="26" height="14" rx="2" fill="#07061a" stroke="#2a2662" stroke-width=".5"/><text x="60" y="171" font-family="Exo 2,Arial,sans-serif" font-weight="800" font-style="italic" font-size="8" letter-spacing="1.5" fill="#4a44a0">GAMEFORCE</text>';
+  // reflections + bezel
+  o+='<polygon points="0,0 70,0 22,190 0,190" fill="url(#rf-'+k+')"/><polygon points="88,0 98,0 50,190 40,190" fill="#fff" opacity=".05"/>'
+   +'<rect x="1" y="1" width="168" height="188" fill="none" stroke="#04030c" stroke-width="2"/>';
+  var base='<svg class="gsvg" viewBox="0 0 170 190" preserveAspectRatio="none" aria-hidden="true">'+o+'</svg>';
+  // glowing layer
+  var L='<defs><linearGradient id="rv-'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset=".35" stop-color="#3b82f6"/><stop offset=".7" stop-color="#22d3ee"/><stop offset="1" stop-color="#ec4899"/></linearGradient>'
+   +'<linearGradient id="rh-'+k+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a855f7"/><stop offset=".35" stop-color="#3b82f6"/><stop offset=".7" stop-color="#22d3ee"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>';
+  for(i=0;i<3;i++){y=10+i*46;L+='<rect x="'+(fx+.8)+'" y="'+(y+2)+'" width="1.8" height="40" rx=".9" fill="url(#rv-'+k+')"/><rect x="'+(fx+21.4)+'" y="'+(y+2)+'" width="1.6" height="40" rx=".8" fill="url(#rv-'+k+')" opacity=".85"/>'}
+  L+='<rect x="5" y="14" width="1.8" height="40" rx=".9" fill="url(#rv-'+k+')"/><rect x="25" y="14" width="1.6" height="40" rx=".8" fill="url(#rv-'+k+')" opacity=".8"/>';
+  if(aio){L+='<circle cx="76" cy="46" r="14" fill="none" stroke="url(#rh-'+k+')" stroke-width="2"/><circle cx="76" cy="46" r="4.5" fill="url(#rh-'+k+')"/>'}
+  L+='<rect x="38" y="'+(gy+1.4)+'" width="'+(gx1-52)+'" height="1.6" rx=".8" fill="url(#rh-'+k+')"/>'
+   +'<rect x="'+((32+gx1)/2-9)+'" y="'+(gy+gh/2-2)+'" width="18" height="4" rx="1.4" fill="url(#rh-'+k+')"/>'
+   +'<rect x="14" y="150.6" width="152" height="1.4" rx=".7" fill="url(#rh-'+k+')"/>'
+   +'<rect x="12" y="186" width="156" height="2" rx="1" fill="url(#rh-'+k+')"/>';
+  var lights='<svg class="gsvg lights gl" viewBox="0 0 170 190" preserveAspectRatio="none" aria-hidden="true">'+L+'</svg>';
+  return base+lights;
+}
+var FCACHE={};
+function facesFor(p){
+  if(FCACHE[p.id])return FCACHE[p.id];
+  var front='<div class="face f-front"><div class="lights">'+fan(1.6,.9,5.8)+fan(1.6,6.7,5.8)+fan(1.6,12.5,5.8)+'<i class="edge"></i></div></div>';
+  var back='<div class="face f-back"><div class="lights">'+fan(2.4,1.2,4.2)+'<i class="strip" style="'+at(.8,17.8)+';width:calc(var(--u)*7.4)"></i></div>'
+    +'<i class="io" style="'+at(1.2,6.4)+';width:calc(var(--u)*6.6);height:calc(var(--u)*3.2)"></i>'
+    +'<i class="io" style="'+at(1.2,10.2)+';width:calc(var(--u)*6.6);height:calc(var(--u)*.7)"></i>'
+    +'<i class="io" style="'+at(1.2,11.4)+';width:calc(var(--u)*6.6);height:calc(var(--u)*.7)"></i>'
+    +'<i class="io" style="'+at(1.2,12.6)+';width:calc(var(--u)*6.6);height:calc(var(--u)*.7)"></i>'
+    +'<i class="io" style="'+at(1.2,14)+';width:calc(var(--u)*6.6);height:calc(var(--u)*2.8)"></i></div>';
+  var glass='<div class="face f-left">'+glassSVG(p)+'</div>';
+  var solid='<div class="face f-right"><span class="side-t">GAMEFORCE</span></div>';
+  var top='<div class="face f-top"><div class="lights"><i class="strip" style="'+at(1,1)+';width:calc(var(--u)*7)"></i><i class="strip" style="'+at(1,15.6)+';width:calc(var(--u)*7)"></i></div></div>';
+  var bottom='<div class="face f-bottom"></div>';
+  return FCACHE[p.id]=front+back+glass+solid+top+bottom;
+}
+function scene(p,i,size){
+  return '<div class="scene '+size+'" style="--ho:'+p.ho+'deg"><div class="pc auto" style="animation-delay:'+(-(i*2.7))+'s">'+facesFor(p)+'</div></div>';
+}
+
+/* ================= КАРТОЧКИ ================= */
+function pcCard(p,i){
+  return '<article class="rgb"><div class="in pcard">'
+    +(p.tag?'<span class="tag">'+p.tag+'</span>':'')
+    +'<a href="#/product/'+p.id+'" aria-label="'+p.name+'">'+scene(p,i,'sm')+'</a>'
+    +'<h3><a href="#/product/'+p.id+'">'+p.name+'</a></h3>'
+    +'<ul class="mini"><li>'+p.cpu+'</li><li>'+p.gpu+' '+p.vram+' ГБ</li><li>'+p.ram+' ГБ '+p.ramT+' · '+ssdL(p.ssd)+' SSD</li></ul>'
+    +'<div class="buy"><div class="price">'+money(p.price)+'</div>'
+    +'<div class="btns"><a class="btn btn-ghost sm" href="#/product/'+p.id+'">Подробнее</a><button class="btn btn-primary sm" data-add="'+p.id+'">Купить</button></div></div>'
+    +'</div></article>';
+}
+function itemCard(x){
+  return '<article class="rgb"><div class="in icard"><div class="icon">'+x.icon+'</div><h3>'+x.name+'</h3><p>'+x.desc+'</p>'
+    +'<div class="buy"><div class="price">'+money(x.price)+'</div><button class="btn btn-primary sm" data-add="'+x.id+'">В корзину</button></div></div></article>';
+}
+function whyHTML(){
+  var w=[['🛡️','Гарантия на компьютеры','Гарантия на каждую сборку и бесплатная диагностика.'],
+         ['🔍','Проверка комплектующих перед отправкой','Тестируем стабильность и температуры до упаковки.'],
+         ['🎯','Помощь с выбором сборки','Подберём ПК под ваши игры, монитор и бюджет.'],
+         ['🚚','Доставка заказов','Надёжная упаковка и отправка по всей России.'],
+         ['💬','Поддержка покупателей','Отвечаем на вопросы до и после покупки.']];
+  return '<section class="why"><div class="wrap"><div class="sec-h"><h2>Почему выбирают <span class="grad">GAMEFORCE</span>?</h2></div><div class="why-g">'
+    +w.map(function(x){return '<div class="rgb"><div class="in" style="padding:20px 16px"><div class="ic">'+x[0]+'</div><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></div>'}).join('')
+    +'</div></div></section>';
+}
+function norm(s){return String(s).toLowerCase().replace(/ё/g,'е').trim()}
+
+/* ================= СТРАНИЦЫ ================= */
+function homeView(){
+  document.title='GAMEFORCE — магазин игровых ПК';
+  var feat=['main','x3d','pro','radeon'].map(function(id){return PCS.filter(function(p){return p.id===id})[0]});
+  app.innerHTML=
+  '<section class="hero"><div class="wrap hero-g">'
+   +'<div><span class="eyebrow">Магазин игровых ПК</span>'
+   +'<h1>Твоя игра.<span>Твои правила.</span></h1>'
+   +'<p class="lead">Мощные игровые компьютеры для побед, стримов и максимального FPS.</p>'
+   +'<div class="cta"><a class="btn btn-primary" href="#/pc">Смотреть компьютеры</a><button class="btn btn-ghost" data-modal="pick">Подобрать ПК</button></div>'
+   +'<div class="badges"><span>🛡️ Гарантия на ПК</span><span>🔍 Проверка перед отправкой</span><span>🚚 Доставка по России</span></div></div>'
+   +'<div class="hero-vis">'+scene(PCS[5],0,'hero3')+'</div>'
+  +'</div></section>'
+  +'<section class="sec"><div class="wrap"><div class="sec-h"><h2>Популярные сборки</h2><a class="btn btn-ghost sm" href="#/pc">Весь каталог →</a></div>'
+   +'<div class="grid">'+feat.map(pcCard).join('')+'</div></div></section>'
+  +'<section class="sec"><div class="wrap"><div class="sec-h"><h2>Категории</h2></div><div class="tiles">'
+   +tile('#/pc','🖥️','Игровые ПК','Готовые сборки на любой бюджет')
+   +tile('#/components','🧠','Комплектующие','Видеокарты, процессоры, память')
+   +tile('#/peripherals','🎧','Периферия','Мониторы, мыши, клавиатуры, гарнитуры')
+  +'</div></div></section>';
+}
+function tile(href,ic,t,d){return '<a class="rgb tile" href="'+href+'"><div class="in"><span class="ic">'+ic+'</span><h3>'+t+'</h3><p>'+d+'</p></div></a>'}
+
+/* ---- каталог ПК с поиском и фильтрами ---- */
+var F={q:'',min:'',max:'',gpu:'',cpu:'',ram:'',ssd:'',sort:''};
+function uniq(arr){return arr.filter(function(v,i){return arr.indexOf(v)===i})}
+function pcView(){
+  document.title='Игровые ПК — GAMEFORCE';
+  var byPrice=PCS.slice().sort(function(a,b){return a.price-b.price});
+  var gpus=uniq(byPrice.map(function(p){return p.gpu})), cpus=uniq(byPrice.map(function(p){return p.cpu}));
+  var rams=uniq(PCS.map(function(p){return p.ram})).sort(function(a,b){return a-b});
+  var ssds=uniq(PCS.map(function(p){return p.ssd})).sort(function(a,b){return a-b});
+  function opts(list,fmt,cur,all){return '<option value="">'+all+'</option>'+list.map(function(v){return '<option value="'+v+'"'+(String(cur)===String(v)?' selected':'')+'>'+fmt(v)+'</option>'}).join('')}
+  app.innerHTML='<div class="wrap"><div class="page-h"><h1>Игровые ПК</h1><p>Готовые сборки из реальных комплектующих. Цена = розничные цены деталей (DNS, 16.10.2026) + сборка и тест. Найдите модель по названию или настройте фильтры.</p></div>'
+   +'<div class="tools"><label class="search"><span>🔍</span><input id="q" type="search" placeholder="Поиск по названию, например PHANTOM" autocomplete="off" value=""></label>'
+   +'<button class="btn btn-ghost ftoggle" id="ft" aria-expanded="false">Фильтры ▾</button></div>'
+   +'<div class="filters" id="fl">'
+   +'<label class="f">Цена от, ₽<input class="in-f" id="fmin" type="number" inputmode="numeric" min="0" step="1000" placeholder="0"></label>'
+   +'<label class="f">Цена до, ₽<input class="in-f" id="fmax" type="number" inputmode="numeric" min="0" step="1000" placeholder="500000"></label>'
+   +'<label class="f">Видеокарта<select class="in-f" id="fgpu">'+opts(gpus,function(v){return v},F.gpu,'Любая')+'</select></label>'
+   +'<label class="f">Процессор<select class="in-f" id="fcpu">'+opts(cpus,function(v){return v},F.cpu,'Любой')+'</select></label>'
+   +'<label class="f">Оперативная память<select class="in-f" id="fram">'+opts(rams,function(v){return v+' ГБ'},F.ram,'Любая')+'</select></label>'
+   +'<label class="f">Объём накопителя<select class="in-f" id="fssd">'+opts(ssds,ssdL,F.ssd,'Любой')+'</select></label>'
+   +'<label class="f">Сортировка<select class="in-f" id="fsort"><option value="">По популярности</option><option value="asc"'+(F.sort==='asc'?' selected':'')+'>Сначала дешёвые</option><option value="desc"'+(F.sort==='desc'?' selected':'')+'>Сначала дорогие</option></select></label>'
+   +'<button class="btn btn-ghost sm" id="freset" style="align-self:end">Сбросить фильтры</button></div>'
+   +'<div class="count" id="count"></div><div class="grid" id="grid"></div></div>';
+  $('#q').value=F.q;$('#fmin').value=F.min;$('#fmax').value=F.max;
+  function upd(){
+    F.q=$('#q').value;F.min=$('#fmin').value;F.max=$('#fmax').value;F.gpu=$('#fgpu').value;F.cpu=$('#fcpu').value;F.ram=$('#fram').value;F.ssd=$('#fssd').value;F.sort=$('#fsort').value;
+    var toks=norm(F.q.replace(/gameforce/ig,'')).split(/\s+/).filter(Boolean);
+    var mn=F.min!==''?+F.min:null,mx=F.max!==''?+F.max:null;
+    var res=PCS.filter(function(p){
+      var hay=norm(p.name+' '+p.cpu+' '+p.gpu);
+      for(var i=0;i<toks.length;i++)if(hay.indexOf(toks[i])<0)return false;
+      if(mn!==null&&p.price<mn)return false;
+      if(mx!==null&&p.price>mx)return false;
+      if(F.gpu&&p.gpu!==F.gpu)return false;
+      if(F.cpu&&p.cpu!==F.cpu)return false;
+      if(F.ram&&String(p.ram)!==F.ram)return false;
+      if(F.ssd&&String(p.ssd)!==F.ssd)return false;
+      return true;
+    });
+    if(F.sort==='asc')res.sort(function(a,b){return a.price-b.price});
+    if(F.sort==='desc')res.sort(function(a,b){return b.price-a.price});
+    $('#count').textContent='Найдено моделей: '+res.length;
+    $('#grid').innerHTML=res.length?res.map(pcCard).join(''):'<div class="empty" style="grid-column:1/-1"><div class="big">🔎</div><h3>Ничего не найдено</h3><p>Попробуйте изменить запрос или сбросить фильтры.</p><br><button class="btn btn-primary" data-reset="1">Сбросить фильтры</button></div>';
+  }
+  ['q','fmin','fmax'].forEach(function(id){$('#'+id).addEventListener('input',upd)});
+  ['fgpu','fcpu','fram','fssd','fsort'].forEach(function(id){$('#'+id).addEventListener('change',upd)});
+  $('#freset').onclick=resetF;
+  function resetF(){F={q:'',min:'',max:'',gpu:'',cpu:'',ram:'',ssd:'',sort:''};$('#q').value='';$('#fmin').value='';$('#fmax').value='';['fgpu','fcpu','fram','fssd','fsort'].forEach(function(id){$('#'+id).value=''});upd()}
+  $('#grid').addEventListener('click',function(e){if(e.target.closest('[data-reset]'))resetF()});
+  $('#ft').onclick=function(){var o=$('#fl').classList.toggle('open');this.setAttribute('aria-expanded',o)};
+  upd();
+}
+
+/* ---- комплектующие / периферия ---- */
+var LS={components:{q:'',sort:''},peripherals:{q:'',sort:''}};
+function listView(cat){
+  var c=CATS[cat],st=LS[cat];
+  document.title=c.title+' — GAMEFORCE';
+  app.innerHTML='<div class="wrap"><div class="page-h"><h1>'+c.title+'</h1><p>'+c.sub+'</p></div>'
+   +'<div class="tools"><label class="search"><span>🔍</span><input id="lq" type="search" placeholder="Поиск по названию" autocomplete="off"></label>'
+   +'<select class="in-f" id="ls" style="width:auto;min-width:150px"><option value="">По умолчанию</option><option value="asc">Дешевле</option><option value="desc">Дороже</option></select></div>'
+   +'<div class="count" id="lc"></div><div class="grid" id="lg"></div></div>';
+  $('#lq').value=st.q;$('#ls').value=st.sort;
+  function upd(){
+    st.q=$('#lq').value;st.sort=$('#ls').value;
+    var t=norm(st.q).split(/\s+/).filter(Boolean);
+    var r=ITEMS.filter(function(x){if(x.cat!==cat)return false;var h=norm(x.name+' '+x.desc);return t.every(function(w){return h.indexOf(w)>=0})});
+    if(st.sort==='asc')r.sort(function(a,b){return a.price-b.price});
+    if(st.sort==='desc')r.sort(function(a,b){return b.price-a.price});
+    $('#lc').textContent='Найдено товаров: '+r.length;
+    $('#lg').innerHTML=r.length?r.map(itemCard).join(''):'<div class="empty" style="grid-column:1/-1"><div class="big">🔎</div><h3>Ничего не найдено</h3></div>';
+  }
+  $('#lq').addEventListener('input',upd);$('#ls').addEventListener('change',upd);upd();
+}
+
+/* ---- страница товара ---- */
+function productView(id){
+  var p=PCS.filter(function(x){return x.id===id})[0];
+  if(!p){return notFound()}
+  document.title=p.name+' — GAMEFORCE';
+  var sim=PCS.filter(function(x){return x.id!==p.id}).sort(function(a,b){return Math.abs(a.price-p.price)-Math.abs(b.price-p.price)}).slice(0,3);
+  var pl=['Full HD','2K (1440p)','4K','Стримы и работа'];
+  var rows=p.parts.map(function(x){return '<tr><td>'+x.t+'</td><td>'+x.n+(x.src?' <small class="mut">('+x.src+')</small>':'')+'</td><td class="pr">'+(x.p?money(x.p):'в комплекте')+'</td></tr>'}).join('')
+   +'<tr><td>Сборка и тест</td><td>Проверка комплектующих, стресс-тест, упаковка</td><td class="pr">'+money(ASSEMBLY)+'</td></tr>'
+   +'<tr class="tot"><td>Итого</td><td>Гарантия 24 месяца</td><td class="pr">'+money(p.price)+'</td></tr>';
+  app.innerHTML='<div class="wrap pp"><a class="back" href="#/pc">← Назад в каталог</a><div class="pgrid">'
+   +'<div class="rgb viewer"><div class="in">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')
+   +'<div class="stage" id="stage">'+scene(p,0,'lg')+'</div>'
+   +'<div class="vctl" id="vctl"><button data-v="0">Спереди</button><button data-v="90">Сбоку</button><button data-v="180">Сзади</button><button data-v="auto" class="on">Вращать</button></div>'
+   +'<p class="hint">Потяните влево или вправо, чтобы повернуть компьютер</p></div></div>'
+   +'<div class="pinfo"><h1>'+p.name+'</h1><div class="pprice">'+money(p.price)+'</div><p class="desc">'+p.desc+'</p>'
+   +'<div class="buyrow"><div class="qty"><button id="qm" aria-label="Меньше">−</button><span id="qv">1</span><button id="qp" aria-label="Больше">+</button></div>'
+   +'<button class="btn btn-primary" id="addb">В корзину</button><button class="btn btn-ghost" id="buyb">Купить сейчас</button></div>'
+   +'<div class="perf">'+pl.map(function(l,i){return '<div class="r"><span>'+l+'</span><div class="bar"><i style="--w:'+p.perf[i]+'%"></i></div><b>'+p.perf[i]+'</b></div>'}).join('')+'</div>'
+   +'<p class="mut" style="font-size:12.5px;margin-top:10px">Оценка производительности — ориентировочная, по шкале от 0 до 100.</p></div></div>'
+   +'<h2 class="h2">Состав и характеристики</h2><table class="spec">'+rows+'</table><p class="mut" style="font-size:12.5px;margin:-16px 0 24px">Цены комплектующих — розничные, DNS на 16 октября 2026 (где указано — минимальные на Ozon). Рынок комплектующих быстро меняется, окончательную цену уточняйте при заказе.</p>'
+   +'<h2 class="h2">Похожие модели</h2><div class="grid">'+sim.map(pcCard).join('')+'</div></div>';
+  var q=1;
+  $('#qm').onclick=function(){q=Math.max(1,q-1);$('#qv').textContent=q};
+  $('#qp').onclick=function(){q=Math.min(99,q+1);$('#qv').textContent=q};
+  $('#addb').onclick=function(){addToCart(p.id,q)};
+  $('#buyb').onclick=function(){addToCart(p.id,q);location.hash='#/cart'};
+  init3D($('#stage'),$('#vctl'));
+}
+function init3D(stage,ctl){
+  var pc=$('.pc',stage);pc.classList.remove('auto');pc.style.animation='none';
+  var ry=30,rx=-10,tr=null,tx=null,auto=true,drag=false,lx=0,ly=0;
+  function frame(){
+    if(!pc.isConnected)return;
+    if(!drag){
+      if(tr!==null){var d=((tr-ry+540)%360)-180;ry+=d*0.12;rx+=(tx-rx)*0.12;if(Math.abs(d)<.3){ry=tr;rx=tx;tr=null}}
+      else if(auto)ry+=0.4;
+    }
+    pc.style.transform='rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  stage.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;tr=null;try{stage.setPointerCapture(e.pointerId)}catch(x){}setBtn(null)});
+  stage.addEventListener('pointermove',function(e){if(!drag)return;ry+=(e.clientX-lx)*0.6;rx=Math.max(-40,Math.min(25,rx-(e.clientY-ly)*0.3));lx=e.clientX;ly=e.clientY});
+  function end(){if(!drag)return;drag=false;auto=false}
+  stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+  function setBtn(v){$$('button',ctl).forEach(function(b){b.classList.toggle('on',b.getAttribute('data-v')===v)})}
+  ctl.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;var v=b.getAttribute('data-v');
+    if(v==='auto'){auto=!auto;tr=null;setBtn(auto?'auto':null);}
+    else{auto=false;tr=parseFloat(v);tx=-8;setBtn(v)}
+  });
+}
+function notFound(){document.title='Не найдено — GAMEFORCE';app.innerHTML='<div class="wrap"><div class="empty"><div class="big">🛰️</div><h2>Страница не найдена</h2><br><a class="btn btn-primary" href="#/pc">В каталог</a></div></div>'}
+
+/* ---- корзина ---- */
+function cartRows(){
+  return Object.keys(cart).map(function(id){
+    var it=ALL[id],q=cart[id],isPc=!!it.cpu;
+    return '<div class="crow"><div class="icon">'+(it.icon||'🖥️')+'</div>'
+     +'<div><h4>'+(isPc?'<a href="#/product/'+id+'">'+it.name+'</a>':it.name)+'</h4><div class="u">'+money(it.price)+' за шт.</div></div>'
+     +'<button class="rm" data-rm="'+id+'" aria-label="Удалить">✕</button>'
+     +'<div class="ctl"><div class="qty"><button data-dec="'+id+'" aria-label="Меньше">−</button><span>'+q+'</span><button data-inc="'+id+'" aria-label="Больше">+</button></div><div class="lt">'+money(it.price*q)+'</div></div></div>';
+  }).join('');
+}
+function sumHTML(){
+  var t=totals();
+  return '<div class="row"><span>Товары ('+cartCount()+' шт.)</span><span>'+money(t.sum)+'</span></div>'
+   +'<div class="row"><span>Доставка</span><span>'+(t.ship===0?'Бесплатно':money(t.ship))+'</span></div>'
+   +(t.sum<FREE_FROM?'<div class="mut" style="font-size:12.5px">До бесплатной доставки: '+money(FREE_FROM-t.sum)+'</div>':'')
+   +'<div class="row tot"><span>Итого</span><b>'+money(t.total)+'</b></div>';
+}
+function cartView(){
+  document.title='Корзина — GAMEFORCE';
+  if(!cartCount()){
+    app.innerHTML='<div class="wrap"><div class="page-h"><h1>Корзина</h1></div><div class="empty"><div class="big">🛒</div><h3>Корзина пуста</h3><p>Добавьте компьютер или комплектующие из каталога.</p><br><a class="btn btn-primary" href="#/pc">Перейти в каталог</a></div></div>';
+    return;
+  }
+  app.innerHTML='<div class="wrap"><div class="page-h"><h1>Корзина</h1></div><div class="cgrid">'
+   +'<div class="rgb"><div class="in" id="clist">'+cartRows()+'</div></div>'
+   +'<div class="rgb sum"><div class="in"><h3 style="font-size:22px;margin-bottom:8px">Ваш заказ</h3><div id="csum">'+sumHTML()+'</div>'
+   +'<form class="form-g" id="co" novalidate><label class="f">Имя<input class="in-f" name="n" autocomplete="name" placeholder="Как к вам обращаться"><span class="err"></span></label>'
+   +'<label class="f">Телефон<input class="in-f" name="t" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00"><span class="err"></span></label>'
+   +'<label class="f">Адрес доставки<input class="in-f" name="a" autocomplete="street-address" placeholder="Город, улица, дом"><span class="err"></span></label>'
+   +'<button class="btn btn-primary" type="submit">Оформить заказ</button></form></div></div></div></div>';
+  $('#co').addEventListener('submit',function(e){
+    e.preventDefault();var f=e.target,ok=true;
+    function chk(name,test,msg){var el=f.elements[name];var er=el.parentNode.querySelector('.err');if(test(el.value.trim())){er.textContent='';return el.value.trim()}er.textContent=msg;ok=false}
+    var n=chk('n',function(v){return v.length>=2},'Укажите имя');
+    chk('t',function(v){return v.replace(/\D/g,'').length>=10},'Введите корректный номер телефона');
+    chk('a',function(v){return v.length>=5},'Укажите адрес доставки');
+    if(!ok)return;
+    var no='GF-'+Math.floor(10000+Math.random()*89999),tot=totals().total;
+    cart={};saveCart();
+    app.innerHTML='<div class="wrap"><div class="page-h"><h1>Заказ принят</h1></div><div class="rgb" style="max-width:560px"><div class="in ok"><div class="big">✅</div><h2 id="okh"></h2><p class="mut" id="okp"></p><br><a class="btn btn-primary" href="#/pc">Продолжить покупки</a></div></div></div>';
+    $('#okh').textContent='Спасибо, '+n+'!';
+    $('#okp').textContent='Заказ №'+no+' на сумму '+money(tot)+' оформлен. Менеджер свяжется с вами для подтверждения.';
+    window.scrollTo(0,0);
+  });
+}
+function refreshCart(){
+  if(!$('#clist'))return;
+  if(!cartCount()){cartView();return}
+  $('#clist').innerHTML=cartRows();$('#csum').innerHTML=sumHTML();
+}
+
+/* ---- контакты ---- */
+function contactsView(){
+  document.title='Контакты — GAMEFORCE';
+  app.innerHTML='<div class="wrap"><div class="page-h"><h1>Контакты</h1><p>Остались вопросы по сборке, доставке или гарантии? Напишите нам — поможем выбрать компьютер.</p></div><div class="cont-g">'
+   +'<div style="display:grid;gap:24px">'
+   +'<div class="rgb info"><div class="in"><h3 style="font-size:22px;margin-bottom:6px">Связаться с нами</h3>'
+   +'<div class="irow"><span class="ic">✉️</span><div><a href="mailto:'+EMAIL+'">'+EMAIL+'</a><small>Электронная почта</small></div></div>'
+   +'<div class="irow"><span class="ic">📞</span><div><a href="tel:+78000000000">+7 (800) 000-00-00</a><small>Звонок бесплатный</small></div></div>'
+   +'<div class="irow"><span class="ic">🕘</span><div>Ежедневно, 09:00–21:00<small>Время работы поддержки</small></div></div></div></div>'
+   +'<div class="rgb info"><div class="in"><h3 style="font-size:22px;margin-bottom:6px">Доставка</h3><ul class="dl">'
+   +'<li>Отправляем по всей России транспортными компаниями</li>'
+   +'<li>Срок доставки — 2–7 рабочих дней, в зависимости от региона</li>'
+   +'<li>Бесплатная доставка при заказе от '+money(FREE_FROM)+', иначе — '+money(DELIVERY)+'</li>'
+   +'<li>Перед отправкой проверяем комплектующие и надёжно упаковываем ПК</li>'
+   +'<li>Пришлём номер для отслеживания посылки</li></ul></div></div></div>'
+   +'<div class="rgb formc"><div class="in"><h3 style="font-size:22px">Напишите нам</h3>'
+   +'<form class="form-g" id="cf" novalidate>'
+   +'<label class="f">Имя<input class="in-f" name="n" autocomplete="name" placeholder="Ваше имя"><span class="err"></span></label>'
+   +'<label class="f">Электронная почта<input class="in-f" name="e" type="email" autocomplete="email" placeholder="you@example.com"><span class="err"></span></label>'
+   +'<label class="f">Тема<select class="in-f" name="s"><option>Подбор сборки</option><option>Вопрос по заказу</option><option>Гарантия</option><option>Другое</option></select></label>'
+   +'<label class="f">Сообщение<textarea class="in-f" name="m" placeholder="Чем мы можем помочь?"></textarea><span class="err"></span></label>'
+   +'<button class="btn btn-primary" type="submit">Отправить сообщение</button><div id="cfok" class="mut" style="font-size:14px"></div></form></div></div></div></div>';
+  $('#cf').addEventListener('submit',function(e){
+    e.preventDefault();var f=e.target,ok=true;
+    function chk(name,test,msg){var el=f.elements[name],er=el.parentNode.querySelector('.err');if(test(el.value.trim())){er.textContent='';return el.value.trim()}er.textContent=msg;ok=false;return ''}
+    var n=chk('n',function(v){return v.length>=2},'Укажите имя');
+    var em=chk('e',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)},'Введите корректный email');
+    var m=chk('m',function(v){return v.length>=5},'Напишите сообщение');
+    if(!ok)return;
+    var body='Имя: '+n+'\nEmail: '+em+'\n\n'+m;
+    $('#cfok').textContent='✅ Спасибо! Сейчас откроется почтовая программа с готовым письмом. Если этого не произошло — напишите нам на '+EMAIL+'.';
+    f.reset();
+    location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('GAMEFORCE: '+f.elements['s'].value)+'&body='+encodeURIComponent(body);
+  });
+}
+
+/* ================= МОДАЛЬНЫЕ ОКНА ================= */
+function closeModal(){var m=$('.modal');if(m)m.remove();document.body.style.overflow=''}
+function openModal(html){
+  closeModal();
+  var m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="rgb"><div class="in mbody"><button class="mx" data-close aria-label="Закрыть">✕</button>'+html+'</div></div>';
+  m.addEventListener('click',function(e){if(e.target===m)closeModal()});
+  document.body.appendChild(m);document.body.style.overflow='hidden';
+}
+function warrantyModal(){
+  openModal('<h2>Условия гарантии</h2><ul class="dl"><li>Гарантия на компьютеры — 24 месяца с момента покупки</li><li>Бесплатная диагностика при обращении по гарантии</li><li>Ремонт или замена неисправных комплектующих в сроки, установленные законом</li><li>Гарантия не распространяется на механические повреждения и следы неправильной эксплуатации</li><li>Для гарантийного обращения сохраните чек или номер заказа</li></ul><p class="mut" style="font-size:13px">Подробности уточняйте у менеджеров: '+EMAIL+'</p>');
+}
+function pickModal(){
+  openModal('<h2>Подобрать ПК</h2><p class="mut">Ответьте на два вопроса — и мы предложим подходящую сборку.</p>'
+   +'<label class="f">Для чего нужен компьютер?<select class="in-f" id="pkT"><option value="0">Киберспорт и высокий FPS (Full HD)</option><option value="1">AAA-игры в 2K</option><option value="2">Игры в 4K и максимальная графика</option><option value="3">Стримы, монтаж и игры</option></select></label>'
+   +'<label class="f">Бюджет<select class="in-f" id="pkB"><option value="150000">до 150 000 ₽</option><option value="250000">до 250 000 ₽</option><option value="450000">до 450 000 ₽</option><option value="99999999">Без ограничений</option></select></label>'
+   +'<button class="btn btn-primary" id="pkGo">Подобрать</button><div id="pkR"></div>');
+  $('#pkGo').onclick=function(){
+    var k=+$('#pkT').value,b=+$('#pkB').value,note='';
+    var c=PCS.filter(function(p){return p.price<=b});
+    if(!c.length){c=[PCS.slice().sort(function(a,b){return a.price-b.price})[0]];note='<p class="mut" style="font-size:13px">В этом бюджете подходящих сборок нет — вот ближайший вариант:</p>'}
+    c.sort(function(a,b){return b.perf[k]-a.perf[k]||a.price-b.price});
+    var p=c[0];
+    $('#pkR').innerHTML=note+'<div class="res"><h3 style="font-size:20px">'+p.name+'</h3><div class="mut" style="font-size:14px">'+p.cpu+' · '+p.gpu+' '+p.vram+' ГБ · '+p.ram+' ГБ · '+ssdL(p.ssd)+'</div><div class="price">'+money(p.price)+'</div>'
+     +'<div class="btns"><a class="btn btn-ghost sm" href="#/product/'+p.id+'" data-close>Подробнее</a><button class="btn btn-primary sm" data-add="'+p.id+'">В корзину</button></div></div>';
+  };
+}
+
+/* ================= РОУТЕР ================= */
+function setActive(name){$$('[data-nav]').forEach(function(a){a.classList.toggle('act',a.getAttribute('data-nav')===name)})}
+function closeMenu(){$('#nav').classList.remove('open');var b=$('#burger');b.classList.remove('open');b.setAttribute('aria-expanded','false')}
+function route(){
+  var parts=location.hash.replace(/^#\/?/,'').split('/'),name=parts[0]||'',arg=parts[1];
+  closeMenu();closeModal();
+  if(name==='pc')pcView();
+  else if(name==='components'||name==='peripherals')listView(name);
+  else if(name==='contacts')contactsView();
+  else if(name==='cart')cartView();
+  else if(name==='product')productView(arg);
+  else{name='';homeView()}
+  if(name!=='cart')app.insertAdjacentHTML('beforeend',whyHTML());
+  setActive(name==='product'?'pc':name);
+  window.scrollTo(0,0);
+}
+
+/* ================= СОБЫТИЯ ================= */
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-modal],[data-close]');
+  if(!t)return;
+  var d=t.dataset;
+  if(d.add){addToCart(d.add)}
+  else if(d.inc){cart[d.inc]=Math.min(99,(cart[d.inc]||0)+1);saveCart();refreshCart()}
+  else if(d.dec){cart[d.dec]=(cart[d.dec]||0)-1;if(cart[d.dec]<=0)delete cart[d.dec];saveCart();refreshCart()}
+  else if(d.rm){delete cart[d.rm];saveCart();refreshCart()}
+  else if(d.modal==='warranty'){warrantyModal()}
+  else if(d.modal==='pick'){pickModal()}
+  else if('close' in d){closeModal()}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+$('#burger').addEventListener('click',function(){var o=$('#nav').classList.toggle('open');this.classList.toggle('open',o);this.setAttribute('aria-expanded',o)});
+window.addEventListener('hashchange',route);
+updateBadge();route();
+})();
+</script>
+</body>
+</html>
